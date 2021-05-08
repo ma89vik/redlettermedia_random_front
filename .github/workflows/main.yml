@@ -40,7 +40,8 @@ jobs:
           host: ${{ secrets.DEPLOY_SERVER }}
           username: ${{ secrets.DEPLOY_USER }}
           password: ${{ secrets.DEPLOY_KEY }}
-          source: "build/."
+          source: "build/*"
           target: "/usr/share/nginx/html/rlm-random"
           rm: true
+          strip_components: 1
   

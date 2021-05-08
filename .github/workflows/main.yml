@@ -32,8 +32,7 @@ jobs:
           node-version: 14.x
           
       - name: Build React app   
-        run: npm install
-        run: npm run build
+        run: npm install && npm run build
 
       - name: Copy to server
         uses: appleboy/scp-action@master
@@ -43,4 +42,6 @@ jobs:
           password: ${{ secrets.DEPLOY_KEY }}
           source: "build/*"
           target: "/usr/share/nginx/html/rlm-random"
+          rm: true
+          strip_components: 1
   

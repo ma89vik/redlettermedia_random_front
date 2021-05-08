@@ -32,6 +32,7 @@ jobs:
           node-version: 14.x
           
       - name: Build React app   
+        run: npm install
         run: npm run build
 
       - name: Copy to server
@@ -39,7 +40,7 @@ jobs:
         with:
           host: ${{ secrets.DEPLOY_SERVER }}
           username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_KEY }}
+          password: ${{ secrets.DEPLOY_KEY }}
           source: "build/*"
-          target: "rlm-random"
+          target: "/usr/share/nginx/html/rlm-random"
   

@@ -1,6 +1,10 @@
 import React from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import './App.css';
+import EpisodePicker from './components/EpisodeForm';
+import RlmRandom from './components/RlmRandom';
+import RlmWheel from './components/RlmWheel';
+import { Route, Switch, Link } from 'react-router-dom';
 
 const { Header, Content, Footer } = Layout;
 
@@ -9,21 +13,24 @@ const App = () => (
     <Layout className="layout">
     <Header>
       <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-        <Menu.Item key="1">nav 1</Menu.Item>
-        <Menu.Item key="2">nav 2</Menu.Item>
-        <Menu.Item key="3">nav 3</Menu.Item>
+      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+        <Menu.Item key="1"><Link to="/random">Random Episode</Link></Menu.Item>
+        <Menu.Item key="2"><Link to="/wheel">Wheel of the Wheel of the Worst</Link></Menu.Item>
+        <Menu.Item className="menuRight" key="4"><a href="https://patreon.com/redlettermedia">RLM Patreon</a></Menu.Item> 
       </Menu>
     </Header>
     <Content style={{ padding: '0 50px' }}>
-      <Breadcrumb style={{ margin: '16px 0' }}>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>List</Breadcrumb.Item>
-        <Breadcrumb.Item>App</Breadcrumb.Item>
-      </Breadcrumb>
-      <div className="site-layout-content">Content</div>
+      <Switch>
+        <Route path="/random">
+          <RlmRandom />
+        </Route>
+        <Route path="/random">
+          <RlmWheel />
+        </Route>
+      </Switch>
+
     </Content>
-    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+    <Footer style={{ textAlign: 'center' }}> This site is a fan project and is in no way affiliated with Redlettermedia </Footer>
   </Layout>,
   </div>
 );

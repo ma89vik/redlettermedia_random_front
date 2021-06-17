@@ -1,7 +1,6 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, } from 'antd';
 import './App.css';
-import EpisodePicker from './components/EpisodeForm';
 import RlmRandom from './components/RlmRandom';
 import RlmWheel from './components/RlmWheel';
 import { Route, Switch, Link } from 'react-router-dom';
@@ -16,7 +15,7 @@ const App = () => (
       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
         <Menu.Item key="1"><Link to="/random">Random Episode</Link></Menu.Item>
         <Menu.Item key="2"><Link to="/wheel">Wheel of the Wheel of the Worst</Link></Menu.Item>
-        <Menu.Item className="menuRight" key="4"><a href="https://patreon.com/redlettermedia">RLM Patreon</a></Menu.Item> 
+        <Menu.Item className="menuRight" key="4"><a href="https://patreon.com/redlettermedia">RLM Patreon</a></Menu.Item>
       </Menu>
     </Header>
     <Content style={{ padding: '0 50px' }}>

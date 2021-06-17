@@ -13,9 +13,6 @@ const FormItem = ({text, searchValue}) => {
         color: "red",
     }
 
-    const textStyle = {
-        
-    }
 
     const colStyle = {
          background: '#0092ff'
@@ -42,16 +39,6 @@ const episodeTypes = [
     {searchValue:"blackSpine", text: "Black Spine"},
 ]
 
-const panelMembers = [
-    {text: "Mike", searchValue: "mike" },
-    {text: "Jay", searchValue: "jay" },
-    {text: "Rich", searchValue: "rich" },
-    {text: "Jack", searchValue: "jack" },
-    {text: "Canadians", searchValue: "canadians"},
-    {text: "Wizard", searchValue: "wizard" }
-]
-
-
 const EpisodePicker = () => {
 
     const createChoice = (text, searchValue) => {
@@ -65,13 +52,13 @@ const EpisodePicker = () => {
                 {episodeTypes.map(e => createChoice(e.text, e.searchValue) )}
             </Checkbox.Group>
             <Row justify="center">
-                <Col span={2}>            
+                <Col span={2}>
                     <Button>Find an Episode</Button>
                 </Col>
-                <Col span={2}>            
+                <Col span={2}>
                     <Button>Next</Button>
                 </Col>
-                
+
             </Row>
         </div>
 

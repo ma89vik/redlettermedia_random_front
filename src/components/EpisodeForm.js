@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { useQuery, useLazyQuery } from '@apollo/client';
 import shortid from 'shortid';
-import { Checkbox, Row, Col, Button } from 'antd';
+import { Checkbox, Row, Col, Space, Button } from 'antd';
 
 import { ALL_HOSTS, ALL_GIMMICKS, GET_RANDOM_EPISODE } from '../queries/episodeQuery'
 import { VideoViewer } from './VideoViewer'
@@ -14,18 +14,23 @@ const FormItem = ({text, toggleSearchParam}) => {
         borderRadius: 30,
         borderWidth: 2,
         margin: 5,
-        padding: 5
+        padding: "10px 20px",
+        width: "400px"
     }
 
     return (
-        <Row justify="center" style={rowStyle} onClick={() => toggleSearchParam(text)} >
-            <Col span={20} >
-                {text}
-            </Col>
-            <Col span={4}>
-                <Checkbox value={text}></Checkbox>
-            </Col>
-        </Row>
+        <div style={rowStyle} onClick={() => toggleSearchParam(text)} >
+            <Row>
+                <Col span={20}>
+                    {text}
+                </Col>
+                <Col span={4}>
+                    <Checkbox value={text} ></Checkbox>
+                </Col>
+
+            </Row>
+
+        </div>
     )
 }
 
@@ -94,25 +99,18 @@ const EpisodePicker = () => {
         <div>
             <VideoViewer isModalVisible={isModalVisible} onOk={handleOk} onCancel={handleCancel} episode={getRandomEpisodeResult} />
 
-            <Row>
-                <Col span={6} offset={9}>
-                <Checkbox.Group style={{ width: '100%'}} value={searchParams} onChange={onChange}>
+
+                <Checkbox.Group value={searchParams} onChange={onChange}>
                 {episodeTypes.map(e => createChoice(e, toggleSearchParam))}
             </Checkbox.Group>
-                </Col>
 
-            </Row>
-
-
-            <Row>
-                <Col span={1} offset={9}>
+            <div>
+                <Space>
                     <Button onClick={findEpisode}>Find an Episode</Button>
-                </Col>
-                <Col span={1} offset={4}>
-                    <Button onClick={next}>Next</Button>
-                </Col>
 
-            </Row>
+                    <Button onClick={next}>Next</Button>
+                </Space>
+            </div>
         </div>
 
     )

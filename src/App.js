@@ -18,7 +18,7 @@ const App = () => (
         <Menu.Item className="menuRight" key="4"><a href="https://patreon.com/redlettermedia">RLM Patreon</a></Menu.Item>
       </Menu>
     </Header>
-    <Content style={{ padding: '0 50px' }}>
+    <Content >
       <Switch>
         <Route path="/random">
           <RlmRandom />

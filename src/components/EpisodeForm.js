@@ -9,30 +9,21 @@ import { VideoViewer } from './VideoViewer'
 
 const FormItem = ({text, toggleSearchParam}) => {
 
-    const checkboxStyle = {
-
-    }
-
     const rowStyle = {
         border: 'solid',
         borderRadius: 30,
+        borderWidth: 2,
         margin: 5,
         padding: 5
     }
 
-    const colStyle = {
-    }
-
-
     return (
         <Row justify="center" style={rowStyle} onClick={() => toggleSearchParam(text)} >
             <Col span={20} >
-                <div style={colStyle} >
                 {text}
-                </div>
             </Col>
             <Col span={4}>
-                <Checkbox style={checkboxStyle} value={text}></Checkbox>
+                <Checkbox value={text}></Checkbox>
             </Col>
         </Row>
     )
@@ -102,14 +93,22 @@ const EpisodePicker = () => {
     return (
         <div>
             <VideoViewer isModalVisible={isModalVisible} onOk={handleOk} onCancel={handleCancel} episode={getRandomEpisodeResult} />
-            <Checkbox.Group style={{ width: '30%'}} value={searchParams} onChange={onChange}>
+
+            <Row>
+                <Col span={6} offset={9}>
+                <Checkbox.Group style={{ width: '100%'}} value={searchParams} onChange={onChange}>
                 {episodeTypes.map(e => createChoice(e, toggleSearchParam))}
             </Checkbox.Group>
-            <Row justify="center">
-                <Col span={2}>
+                </Col>
+
+            </Row>
+
+
+            <Row>
+                <Col span={1} offset={9}>
                     <Button onClick={findEpisode}>Find an Episode</Button>
                 </Col>
-                <Col span={2}>
+                <Col span={1} offset={4}>
                     <Button onClick={next}>Next</Button>
                 </Col>
 

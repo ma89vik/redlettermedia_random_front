@@ -7,7 +7,7 @@ import { ALL_HOSTS, ALL_GIMMICKS, GET_RANDOM_EPISODE } from '../queries/episodeQ
 import { VideoViewer } from './VideoViewer'
 
 
-const FormItem = ({text, toggleSearchParam}) => {
+const ChoiceItem = ({text, toggleSearchParam}) => {
 
     const rowStyle = {
         border: 'solid',
@@ -25,37 +25,14 @@ const FormItem = ({text, toggleSearchParam}) => {
                     {text}
                 </Col>
                 <Col span={4}>
-                    <Checkbox value={text} ></Checkbox>
+                    <Checkbox value={text} onChange={() => null} ></Checkbox>
                 </Col>
-
             </Row>
-
         </div>
     )
 }
 
-const EpisodePicker = () => {
-
-    const hostsQuery = useQuery(ALL_HOSTS)
-    const gimmicksQuery = useQuery(ALL_GIMMICKS)
-    const [getRandomEpisode, getRandomEpisodeResult] = useLazyQuery(GET_RANDOM_EPISODE)
-
-    const [searchParams, setSearchParams] = useState([]);
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
-    if (gimmicksQuery.loading) {
-        return null
-    }
-
-    console.log("getRandomEpisodeResult", getRandomEpisodeResult)
-
-    const episodeTypes = gimmicksQuery.data.gimmicks
-
-    console.log(episodeTypes)
-
-    const createChoice = (text, toggleSearchParam) => {
-        return <FormItem text={text} key={shortid.generate()} toggleSearchParam={toggleSearchParam}/>
-    }
+const ChoiceForm = ({inputItems, searchParams, setSearchParams}) => {
 
     const toggleSearchParam = (param) => {
         if (searchParams.find( e => e === param)) {
@@ -65,26 +42,64 @@ const EpisodePicker = () => {
         }
     }
 
-    const next = () => {
-        console.log("NEXT PARAMS", searchParams)
+    const setAllSearchParams = (param) => {
+        setSearchParams([...inputItems, param])
+    }
 
+    return (
+        <Checkbox.Group value={searchParams}>
+            {inputItems.map(e => {
+                 return <ChoiceItem text={e} key={shortid.generate()} toggleSearchParam={ toggleSearchParam }/>
+            })}
+            <ChoiceItem text={"All of the above"} key={shortid.generate()} toggleSearchParam={ setAllSearchParams }/>
+        </Checkbox.Group>
+    )
+}
+
+const EpisodePicker = () => {
+
+    const hostsQuery = useQuery(ALL_HOSTS)
+    const gimmicksQuery = useQuery(ALL_GIMMICKS)
+    const [getRandomEpisode, getRandomEpisodeResult] = useLazyQuery(GET_RANDOM_EPISODE)
+
+    const [hostParams, setHostParams] = useState([])
+    const [gimmickParams, setGimmickParams] = useState([])
+    const [screenState, setScreenState] = useState('gimmick')
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    if (hostsQuery.loading || gimmicksQuery.loading) {
+        return null
+    }
+
+    const gimmicks = gimmicksQuery.data.gimmicks
+    const hosts = hostsQuery.data.hosts
+
+
+
+    const gimmickChoices = () => {
+        return <ChoiceForm inputItems={gimmicks} searchParams={gimmickParams} setSearchParams={setGimmickParams}/>
+    }
+
+    const hostChoices = () => {
+        return <ChoiceForm inputItems={hosts.map(h => h.name)} searchParams={hostParams} setSearchParams={setHostParams}/>
+    }
+
+    const next = () => {
+        setScreenState('host')
     }
 
     const findEpisode = () => {
-        console.log("FIND EPISODE", searchParams)
-        getRandomEpisode({ variables: { gimmicks: searchParams } })
+        const searchParams = {}
+        if (hostParams.length > 0) {
+            searchParams.hosts = hostParams
+        }
+        if (gimmickParams.length > 0) {
+            searchParams.gimmicks = gimmickParams
+        }
+
+        getRandomEpisode( { variables: searchParams } )
         setIsModalVisible(true)
-
     }
-
-    function onChange(checkedValues) {
-        console.log('checked = ', checkedValues);
-        setSearchParams(checkedValues)
-
-
-    }
-    console.log("isModalVisible", isModalVisible)
-
 
     const handleOk = () => {
         setIsModalVisible(false);
@@ -94,16 +109,21 @@ const EpisodePicker = () => {
         setIsModalVisible(false);
       };
 
+    const inputChoices = () => {
+        if (screenState === 'gimmick') {
+            return gimmickChoices()
+        } else if (screenState === 'host') {
+            return hostChoices()
+        } else {
+            return null
+        }
+    }
 
     return (
         <div>
             <VideoViewer isModalVisible={isModalVisible} onOk={handleOk} onCancel={handleCancel} episode={getRandomEpisodeResult} />
 
-
-                <Checkbox.Group value={searchParams} onChange={onChange}>
-                {episodeTypes.map(e => createChoice(e, toggleSearchParam))}
-            </Checkbox.Group>
-
+            {inputChoices()}
             <div>
                 <Space>
                     <Button onClick={findEpisode}>Find an Episode</Button>

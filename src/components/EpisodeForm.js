@@ -60,7 +60,11 @@ const EpisodePicker = () => {
 
     const hostsQuery = useQuery(ALL_HOSTS)
     const gimmicksQuery = useQuery(ALL_GIMMICKS)
-    const [getRandomEpisode, getRandomEpisodeResult] = useLazyQuery(GET_RANDOM_EPISODE)
+    const [getRandomEpisode, getRandomEpisodeResult] = useLazyQuery(GET_RANDOM_EPISODE,
+        {
+            fetchPolicy: "network-only"
+        }
+    )
 
     const [hostParams, setHostParams] = useState([])
     const [gimmickParams, setGimmickParams] = useState([])

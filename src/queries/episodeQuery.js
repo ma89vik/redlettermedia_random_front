@@ -19,6 +19,7 @@ export const GET_RANDOM_EPISODE = gql`
 query findRandomEpisode($gimmicks: [String!]){
   randomEpisode(gimmicks: $gimmicks) {
       title
+      link
   }
 }
 `

@@ -20,6 +20,7 @@ query findRandomEpisode($gimmicks: [String!]){
   randomEpisode(gimmicks: $gimmicks) {
       title
       link
+      hosts
   }
 }
 `

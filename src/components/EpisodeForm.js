@@ -105,10 +105,6 @@ const EpisodePicker = () => {
         setIsModalVisible(true)
     }
 
-    const handleOk = () => {
-        setIsModalVisible(false);
-      };
-
       const handleCancel = () => {
         setIsModalVisible(false);
       };
@@ -125,7 +121,7 @@ const EpisodePicker = () => {
 
     return (
         <div>
-            <VideoViewer isModalVisible={isModalVisible} onOk={handleOk} onCancel={handleCancel} episode={getRandomEpisodeResult} />
+            <VideoViewer isModalVisible={isModalVisible} onCancel={handleCancel} episode={getRandomEpisodeResult} getNewEpisode={findEpisode}  />
 
             {inputChoices()}
             <div>

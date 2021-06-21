@@ -1,18 +1,16 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
 import YoutubeEmbed from "./EmbeddedYoutube"
+import HostAvatarGroup from "./HostAvatarGroup"
 
 
-export const VideoViewer = ({isModalVisible, onOk, onCancel, episode}) => {
+export const VideoViewer = ({isModalVisible, onOk, onCancel, episode, getNewEpisode}) => {
     console.log("episode query", episode)
 
     if (!episode) {
         return null
     }
 
-    const findNewEpisode = () =>[
-        console.log("Find a new episode")
-    ]
 
     return (
         <Modal title="Random Episode"  visible={isModalVisible} onOk={onOk} onCancel={onCancel}
@@ -21,7 +19,7 @@ export const VideoViewer = ({isModalVisible, onOk, onCancel, episode}) => {
               Return
             </Button>,
             <Button
-              onClick={findNewEpisode}
+              onClick={getNewEpisode}
             >
               No Rich Evans? Gimme another one...
             </Button>,
@@ -29,10 +27,11 @@ export const VideoViewer = ({isModalVisible, onOk, onCancel, episode}) => {
         >
 
         { !episode.loading && episode.data &&
-                <div>
-            <p>{episode.data.randomEpisode.title}</p>
-            <YoutubeEmbed embedId={episode.data.randomEpisode.link.split("v=")[1]} />
-        </div>
+            <div>
+                <p>{episode.data.randomEpisode.title}</p>
+                <YoutubeEmbed embedId={episode.data.randomEpisode.link.split("v=")[1]} />
+                <HostAvatarGroup hosts={episode.data.randomEpisode.hosts}/>
+            </div>
 
         }
 

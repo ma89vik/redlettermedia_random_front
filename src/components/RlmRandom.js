@@ -4,7 +4,7 @@ const RlmRandom = () => {
 
     return (
         <div >
-            <h2 style={{textAlign: "center"}} >Choose your episode</h2>
+            <h2>Choose your episode</h2>
             <EpisodePicker />
         </div>
     )

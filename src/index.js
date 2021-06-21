@@ -10,7 +10,7 @@ import {
   ApolloClient, ApolloProvider, HttpLink, InMemoryCache
 } from '@apollo/client'
 
-const backendUrlProd = 'http://fanmenrui.xyz:4000'
+const backendUrlProd = 'http://fanmenrui.xyz:4000/rlm/api/'
 const backendUrlDev = 'http://localhost:4000'
 const backendUrl = process.env.NODE_ENV === 'production' ? backendUrlProd : backendUrlDev
 

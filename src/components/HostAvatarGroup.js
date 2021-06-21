@@ -1,6 +1,5 @@
 
 import { Avatar, Tooltip } from 'antd';
-import { UserOutlined, AntDesignOutlined } from '@ant-design/icons';
 import shortid from 'shortid'
 
 import * as icons from '../assets/images'
@@ -8,14 +7,29 @@ import * as icons from '../assets/images'
 
 const HostAvatarGroup = ({hosts}) => {
 
+  const HostAvatar = (host) => {
+    const iconPath = `${host}Icon`
+    console.log("iconPath", iconPath, icons[iconPath])
+
+    if (iconPath in icons) {
+      return (
+        <Avatar src={icons[iconPath]} />
+      )
+    } else {
+      return (
+        <Avatar >
+          {host}
+        </Avatar>
+      )
+    }
+  }
+
   return (
     <Avatar.Group key={shortid.generate()}>
       {hosts.map( (host) => {
-        const iconPath = `${host}Icon`
-        console.log("iconPath", iconPath, icons[iconPath])
         return (
-          <Tooltip title={host} placement="top">
-            <Avatar src={icons[iconPath]} />
+          <Tooltip title={host} placement="top" key={shortid.generate()}>
+            {HostAvatar(host)}
           </Tooltip>
         )
       })}

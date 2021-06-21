@@ -21,6 +21,9 @@ query findRandomEpisode($gimmicks: [String!]){
       title
       link
       hosts
+      films {
+        title
+      }
   }
 }
 `

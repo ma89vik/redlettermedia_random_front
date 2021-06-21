@@ -2,7 +2,7 @@
 
 name: CI
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
@@ -30,8 +30,8 @@ jobs:
         uses: actions/setup-node@v2.1.5
         with:
           node-version: 14.x
-          
-      - name: Build React app   
+
+      - name: Build React app
         run: npm install && npm run build
 
       - name: Copy to server
@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           password: ${{ secrets.DEPLOY_KEY }}
           source: "build/*"
-          target: "/usr/share/nginx/html/rlm-random"
+          target: "/usr/share/nginx/html/rlm"
           rm: true
           strip_components: 1
-  
+

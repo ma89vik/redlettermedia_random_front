@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { useQuery, useLazyQuery } from '@apollo/client';
 import shortid from 'shortid';
-import { Checkbox, Row, Col, Space, Button } from 'antd';
+import { Checkbox, Row, Col, Button } from 'antd';
 
 import { ALL_HOSTS, ALL_GIMMICKS, GET_RANDOM_EPISODE } from '../queries/episodeQuery'
 import { VideoViewer } from './VideoViewer'
@@ -93,6 +93,10 @@ const EpisodePicker = () => {
         setScreenState('host')
     }
 
+    const back = () => {
+        setScreenState('gimmick')
+    }
+
     const findEpisode = () => {
         const searchParams = {}
         if (hostParams.length > 0) {
@@ -119,19 +123,22 @@ const EpisodePicker = () => {
             return null
         }
     }
-
     return (
         <div>
             <VideoViewer isModalVisible={isModalVisible} onCancel={handleCancel} episode={getRandomEpisodeResult} getNewEpisode={findEpisode}  />
 
             {inputChoices()}
-            <div>
-                <Space>
+            <Row justify="space-between">
+                <Col>
+                 <Button onClick={back}>Back</Button>
+                </Col>
+                <Col>
                     <Button onClick={findEpisode}>Find an Episode</Button>
-
-                    <Button onClick={next}>Next</Button>
-                </Space>
-            </div>
+                </Col>
+                <Col>
+                 <Button onClick={next}>Next</Button>
+                </Col>
+            </Row>
         </div>
 
     )

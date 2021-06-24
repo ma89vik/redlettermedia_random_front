@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, } from 'antd';
+import { Layout, Menu, Row, Col } from 'antd';
 import './App.css';
 import RlmRandom from './components/RlmRandom';
 import RlmWheel from './components/RlmWheel';
@@ -18,7 +18,9 @@ const App = () => (
         <Menu.Item className="menuRight" key="4"><a href="https://patreon.com/redlettermedia">RLM Patreon</a></Menu.Item>
       </Menu>
     </Header>
-    <Content >
+    <Row justify="center">
+      <Col>
+      <Content >
       <Switch>
         <Route path="/rlm/random">
           <RlmRandom />
@@ -32,6 +34,11 @@ const App = () => (
       </Switch>
 
     </Content>
+      </Col>
+
+
+    </Row>
+
     <Footer style={{ textAlign: 'center' }}> This site is a fan project and is in no way affiliated with Redlettermedia </Footer>
   </Layout>,
   </div>

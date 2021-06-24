@@ -14,8 +14,9 @@ const ChoiceItem = ({text, toggleSearchParam}) => {
         borderRadius: 30,
         borderWidth: 2,
         margin: 5,
-        padding: "10px 20px",
-        width: "400px"
+        padding: "1em 2em",
+        width: "20em",
+        cursor: "pointer"
     }
 
     return (

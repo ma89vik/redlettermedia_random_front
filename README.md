@@ -1,4 +1,4 @@
 # Redlettermedia React Frontend
-![example workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+![master](https://github.com/ma89vik/redlettermedia_random_front/actions/workflows/main.yml/badge.svg)
 
 React frontend for redlettermedia video randomizer

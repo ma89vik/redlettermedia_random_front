@@ -1,8 +1,6 @@
 
 import { Card, Row, Col } from 'antd';
 
-const { Meta } = Card;
-
 const FilmCard = (film) => {
     const defaultPoster = 'https://a.ltrbxd.com/resized/film-poster/7/1/1/1/8/71118-nukie-0-125-0-187-crop.jpg?k=891d05d317'
 

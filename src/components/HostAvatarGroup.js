@@ -13,7 +13,7 @@ const HostAvatarGroup = ({hosts}) => {
 
     if (iconPath in icons) {
       return (
-        <Avatar src={icons[iconPath]} />
+        <Avatar gap="1" src={icons[iconPath]} />
       )
     } else {
       return (

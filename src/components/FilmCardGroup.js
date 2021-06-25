@@ -4,7 +4,7 @@ import { Card, Row, Col } from 'antd';
 const { Meta } = Card;
 
 const FilmCard = (film) => {
-    console.log("FIlm", film)
+    const defaultPoster = 'https://a.ltrbxd.com/resized/film-poster/7/1/1/1/8/71118-nukie-0-125-0-187-crop.jpg?k=891d05d317'
 
     const redirectToFilm = () => {
         if(film.url) {
@@ -17,7 +17,8 @@ const FilmCard = (film) => {
     return (
       <Card
         hoverable
-        cover={<img alt="film poster" src={film.poster} />}
+        cover={<img alt="film poster" src={film.poster ? film.poster : defaultPoster} />}
+        style={{width: "10em"}}
         onClick={ redirectToFilm }
       >
         <Meta title={film.title}/>

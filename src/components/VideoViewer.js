@@ -4,6 +4,7 @@ import YoutubeEmbed from "./EmbeddedYoutube"
 import HostAvatarGroup from "./HostAvatarGroup"
 
 import shortid from 'shortid'
+import { FilmCardGroup } from './FIlmCardGroup';
 
 export const VideoViewer = ({isModalVisible, onOk, onCancel, episode, getNewEpisode}) => {
     console.log("episode query", episode)
@@ -27,6 +28,7 @@ export const VideoViewer = ({isModalVisible, onOk, onCancel, episode, getNewEpis
               No Rich Evans? Gimme another one...
             </Button>,
           ]}
+          width={'50em'}
         >
 
         { !episode.loading &&
@@ -42,9 +44,9 @@ export const VideoViewer = ({isModalVisible, onOk, onCancel, episode, getNewEpis
                   <br></br>
                   <div>
                     <b>Films:</b>
-                    <ul>
-                      {randomEpisode.films.map(f => <li key={shortid.generate()}>{f.title}</li>)}
-                    </ul>
+                    <FilmCardGroup films={randomEpisode.films}>
+
+                    </FilmCardGroup>
                   </div>
 
 

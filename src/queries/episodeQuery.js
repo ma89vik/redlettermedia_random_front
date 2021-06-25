@@ -23,6 +23,8 @@ query findRandomEpisode($gimmicks: [String!]){
       hosts
       films {
         title
+        poster
+        url
       }
   }
 }

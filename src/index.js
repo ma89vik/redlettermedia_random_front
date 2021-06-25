@@ -11,8 +11,8 @@ import {
 } from '@apollo/client'
 
 const backendUrlProd = 'https://fanmenrui.xyz/rlm/api/'
-const backendUrlDev = 'http://localhost:4000'
-//const backendUrlDev = 'https://fanmenrui.xyz/rlm/api/'
+//const backendUrlDev = 'http://localhost:4000'
+const backendUrlDev = 'https://fanmenrui.xyz/rlm/api/'
 const backendUrl = process.env.NODE_ENV === 'production' ? backendUrlProd : backendUrlDev
 
 const client = new ApolloClient({

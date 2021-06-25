@@ -21,7 +21,7 @@ const FilmCard = (film) => {
         style={{width: "10em"}}
         onClick={ redirectToFilm }
       >
-        <Meta title={film.title}/>
+        <p><b>{film.title}</b></p>
       </Card>
     )
 }

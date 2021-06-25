@@ -3,7 +3,6 @@ import { Modal, Button } from 'antd';
 import YoutubeEmbed from "./EmbeddedYoutube"
 import HostAvatarGroup from "./HostAvatarGroup"
 
-import shortid from 'shortid'
 import { FilmCardGroup } from './FIlmCardGroup';
 
 export const VideoViewer = ({isModalVisible, onOk, onCancel, episode, getNewEpisode}) => {
